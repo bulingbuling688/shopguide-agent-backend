@@ -12,6 +12,13 @@ def test_health():
     assert response.json()["status"] == "ok"
 
 
+def test_root_serves_console():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "ShopGuide 智能导购 Agent" in response.text
+    assert "/static/app.js" in response.text
+
+
 def test_rag_search_keyword_and_vector():
     response = client.post("/rag/search", json={"query": "3000 元左右拍照好的手机", "top_k": 3})
     assert response.status_code == 200

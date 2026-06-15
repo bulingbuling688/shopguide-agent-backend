@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShopGuide 智能导购 Agent</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/vendor/lucide.min.js" defer></script>
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">SG</div>
+          <div>
+            <h1>ShopGuide 智能导购 Agent</h1>
+            <p>电商商品检索 · 推荐解释 · 多轮会话 · 流式输出</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button class="ghost-button" id="healthBtn" type="button">
+            <i data-lucide="activity"></i>
+            健康检查
+          </button>
+          <a class="ghost-button" href="/docs" target="_blank" rel="noreferrer">
+            <i data-lucide="book-open"></i>
+            API 文档
+          </a>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="panel input-panel">
+          <div class="section-head">
+            <span class="eyebrow">输入</span>
+            <h2>导购需求</h2>
+          </div>
+
+          <label class="field">
+            <span>用户表达</span>
+            <textarea id="queryInput" rows="7">我想买轻薄办公笔记本，预算 6000，主要写代码和出差</textarea>
+          </label>
+
+          <div class="form-grid">
+            <label class="field">
+              <span>品类</span>
+              <select id="categoryInput">
+                <option value="">自动识别</option>
+                <option value="手机">手机</option>
+                <option value="笔记本">笔记本</option>
+                <option value="耳机">耳机</option>
+                <option value="相机">相机</option>
+                <option value="家电">家电</option>
+                <option value="手表">手表</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>预算上限</span>
+              <input id="maxPriceInput" type="number" min="1" placeholder="例如 6000" />
+            </label>
+            <label class="field">
+              <span>返回数量</span>
+              <input id="topKInput" type="number" min="1" max="10" value="3" />
+            </label>
+            <label class="field">
+              <span>会话 ID</span>
+              <input id="sessionInput" type="text" value="interview-demo" />
+            </label>
+          </div>
+
+          <div class="sample-row" aria-label="样例需求">
+            <button class="sample-chip" type="button" data-query="我想买轻薄办公笔记本，预算 6000，主要写代码和出差">办公本</button>
+            <button class="sample-chip" type="button" data-query="帮我推荐适合通勤的降噪耳机，预算 1000 以内">降噪耳机</button>
+            <button class="sample-chip" type="button" data-query="家里有宠物，想买能处理毛发的清洁家电">宠物清洁</button>
+            <button class="sample-chip" type="button" data-query="3000 元左右拍照好的手机，不要游戏手机">拍照手机</button>
+          </div>
+
+          <div class="action-grid">
+            <button class="primary-button" id="recommendBtn" type="button">
+              <i data-lucide="play"></i>
+              运行推荐
+            </button>
+            <button class="secondary-button" id="searchBtn" type="button">
+              <i data-lucide="search"></i>
+              RAG 检索
+            </button>
+            <button class="secondary-button" id="chatBtn" type="button">
+              <i data-lucide="messages-square"></i>
+              多轮对话
+            </button>
+            <button class="secondary-button" id="streamBtn" type="button">
+              <i data-lucide="radio"></i>
+              流式对话
+            </button>
+          </div>
+          <div class="utility-row">
+            <button class="text-button" id="clearBtn" type="button">清空结果</button>
+            <button class="text-button" id="copyBtn" type="button">复制 JSON</button>
+          </div>
+        </section>
+
+        <section class="panel flow-panel">
+          <div class="section-head row-between">
+            <div>
+              <span class="eyebrow">链路</span>
+              <h2>Agent 执行过程</h2>
+            </div>
+            <span class="status-pill" id="statusPill">待运行</span>
+          </div>
+
+          <div class="node-list" id="nodeList">
+            <article class="flow-node" data-node="parse_intent">
+              <div class="node-icon"><i data-lucide="scan-text"></i></div>
+              <div>
+                <h3>parse_intent</h3>
+                <p>意图解析、预算抽取、品类识别</p>
+              </div>
+            </article>
+            <article class="flow-node" data-node="retrieve_products">
+              <div class="node-icon"><i data-lucide="database"></i></div>
+              <div>
+                <h3>retrieve_products</h3>
+                <p>关键词召回 + ChromaDB 向量召回</p>
+              </div>
+            </article>
+            <article class="flow-node" data-node="rank_and_explain">
+              <div class="node-icon"><i data-lucide="list-checks"></i></div>
+              <div>
+                <h3>rank_and_explain</h3>
+                <p>重排、推荐理由、风险提示</p>
+              </div>
+            </article>
+            <article class="flow-node" data-node="generate_response">
+              <div class="node-icon"><i data-lucide="sparkles"></i></div>
+              <div>
+                <h3>generate_response</h3>
+                <p>中文回复生成、SSE token 输出</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="trace-box">
+            <div class="trace-head">
+              <span>Trace</span>
+              <button class="text-button" id="toggleJsonBtn" type="button">展开原始响应</button>
+            </div>
+            <div class="trace-list" id="traceList"></div>
+          </div>
+        </section>
+
+        <section class="panel result-panel">
+          <div class="section-head row-between">
+            <div>
+              <span class="eyebrow">输出</span>
+              <h2>推荐结果</h2>
+            </div>
+            <div class="segmented" role="tablist" aria-label="输出视图">
+              <button class="segment active" type="button" data-view="cards">卡片</button>
+              <button class="segment" type="button" data-view="json">JSON</button>
+            </div>
+          </div>
+
+          <div class="answer-box" id="answerBox">
+            <span class="muted">运行一次推荐或对话后展示结果。</span>
+          </div>
+
+          <div class="cards-view" id="cardsView">
+            <div class="empty-state">
+              <i data-lucide="shopping-bag"></i>
+              <p>暂无商品结果</p>
+            </div>
+          </div>
+
+          <pre class="json-view hidden" id="jsonView">{}</pre>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

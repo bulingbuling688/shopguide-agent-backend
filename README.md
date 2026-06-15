@@ -16,7 +16,7 @@ ShopGuide Agent Backend is a FastAPI service for multi-turn e-commerce shopping 
 
 It is built for shopping assistant scenarios where users describe vague needs such as budget, usage context, product category, preferences, or exclusions. The backend parses intent, retrieves products, ranks candidates, explains recommendations, keeps conversation state, and streams generated responses to the frontend through SSE.
 
-The current version is designed as an interview-ready backend project: it exposes real API endpoints, uses a LangGraph workflow, supports hybrid retrieval with ChromaDB indexing plus keyword matching, and keeps session state in SQLite.
+The current version is designed as an interview-ready Agent project: it exposes a Chinese demo console at the root URL, real API endpoints, a LangGraph workflow, hybrid retrieval with ChromaDB indexing plus keyword matching, SQLite session state, and SSE streaming.
 
 ## Features
 
@@ -24,6 +24,7 @@ The current version is designed as an interview-ready backend project: it expose
 - `/rag/search` endpoint for hybrid product retrieval.
 - `/chat` endpoint for multi-turn shopping conversation.
 - `/chat/stream` endpoint for Server-Sent Events token streaming.
+- Chinese demo console for recommendation, retrieval, multi-turn chat, stream output, trace viewing, and raw JSON inspection.
 - LangGraph workflow for intent parsing, product retrieval, ranking, explanation, and response generation.
 - KeywordRetriever, VectorRetriever, and HybridRetriever components.
 - ChromaDB product index with lightweight local embeddings.
@@ -36,6 +37,7 @@ The current version is designed as an interview-ready backend project: it expose
 | Layer | Technology |
 |---|---|
 | Backend Framework | FastAPI |
+| Frontend | FastAPI static single-page console |
 | Agent Orchestration | LangGraph |
 | Retrieval | ChromaDB, keyword retrieval, lightweight vector retrieval |
 | Data Model | Pydantic |

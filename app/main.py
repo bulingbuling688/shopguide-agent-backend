@@ -3,10 +3,12 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 
 from .agent import run_recommendation
 from .conversation import SQLiteConversationStore
@@ -25,12 +27,14 @@ from .retrievers import HybridRetriever
 
 APP_VERSION = "0.1.0"
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./shopguide.db")
+STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 app = FastAPI(
     title="ShopGuide Agent Backend",
     description="Multi-turn shopping guide and product retrieval Agent backend.",
     version=APP_VERSION,
 )
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -118,9 +122,5 @@ async def chat_stream(payload: ChatRequest) -> StreamingResponse:
 
 
 @app.get("/")
-def root() -> dict[str, str]:
-    return {
-        "service": "ShopGuide Agent Backend",
-        "docs": "/docs",
-        "health": "/health",
-    }
+def root() -> FileResponse:
+    return FileResponse(STATIC_DIR / "index.html")

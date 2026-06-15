@@ -8,7 +8,7 @@ Production target:
 https://shopguide-agent-backend.chatapi.fun
 ```
 
-Status: pending deployment.
+Status: deployed.
 
 ## Overview
 

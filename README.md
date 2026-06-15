@@ -106,7 +106,7 @@ shopguide-agent-backend
 GitHub repo:
 
 ```text
-pending
+https://github.com/bulingbuling688/shopguide-agent-backend
 ```
 
 VPS:

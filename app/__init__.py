@@ -1,0 +1,1 @@
+"""ShopGuide Agent backend package."""

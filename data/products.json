@@ -1,0 +1,98 @@
+[
+  {
+    "id": "sku-phone-001",
+    "title": "Nova X7 轻薄旗舰手机",
+    "category": "手机",
+    "brand": "Nova",
+    "price": 3699,
+    "rating": 4.7,
+    "tags": ["轻薄", "拍照", "高刷", "快充"],
+    "features": ["187g 轻薄机身", "5000 万像素主摄", "120Hz OLED 屏", "80W 快充"],
+    "stock": 84,
+    "description": "适合重视手感、拍照和屏幕体验的用户，性能均衡，适合日常和轻度游戏。"
+  },
+  {
+    "id": "sku-phone-002",
+    "title": "Raptor G9 游戏手机",
+    "category": "手机",
+    "brand": "Raptor",
+    "price": 4599,
+    "rating": 4.6,
+    "tags": ["游戏", "散热", "大电池", "高性能"],
+    "features": ["主动散热风道", "6000mAh 电池", "肩键", "144Hz 屏幕"],
+    "stock": 46,
+    "description": "适合高强度手游和长时间性能释放，不适合追求轻薄手感的用户。"
+  },
+  {
+    "id": "sku-laptop-001",
+    "title": "AirBook 14 办公轻薄本",
+    "category": "笔记本",
+    "brand": "AirBook",
+    "price": 5299,
+    "rating": 4.8,
+    "tags": ["办公", "轻薄", "长续航", "学生"],
+    "features": ["1.25kg 机身", "2.8K 屏幕", "16GB 内存", "约 12 小时续航"],
+    "stock": 73,
+    "description": "适合学生、办公和出差场景，便携与续航表现好，不适合大型 3D 游戏。"
+  },
+  {
+    "id": "sku-laptop-002",
+    "title": "Creator Pro 16 创作本",
+    "category": "笔记本",
+    "brand": "Creator",
+    "price": 8999,
+    "rating": 4.5,
+    "tags": ["设计", "剪辑", "独显", "大屏"],
+    "features": ["RTX 独立显卡", "32GB 内存", "100% P3 色域", "双风扇散热"],
+    "stock": 25,
+    "description": "适合视频剪辑、设计建模和多任务创作，机身偏重，续航一般。"
+  },
+  {
+    "id": "sku-headphone-001",
+    "title": "QuietPods Pro 降噪耳机",
+    "category": "耳机",
+    "brand": "QuietPods",
+    "price": 899,
+    "rating": 4.7,
+    "tags": ["降噪", "通勤", "无线", "长续航"],
+    "features": ["主动降噪", "通透模式", "36 小时综合续航", "低延迟模式"],
+    "stock": 132,
+    "description": "适合通勤、办公和高铁飞机场景，佩戴舒适，低频表现较强。"
+  },
+  {
+    "id": "sku-camera-001",
+    "title": "PocketCam Vlog 口袋相机",
+    "category": "相机",
+    "brand": "PocketCam",
+    "price": 2499,
+    "rating": 4.4,
+    "tags": ["vlog", "防抖", "便携", "视频"],
+    "features": ["三轴防抖", "4K 视频", "翻转屏", "一键美颜"],
+    "stock": 39,
+    "description": "适合短视频、旅行记录和新手拍摄，不适合专业商业摄影。"
+  },
+  {
+    "id": "sku-home-001",
+    "title": "CleanBot S5 扫拖机器人",
+    "category": "家电",
+    "brand": "CleanBot",
+    "price": 2199,
+    "rating": 4.6,
+    "tags": ["扫地", "拖地", "自动集尘", "宠物"],
+    "features": ["激光导航", "自动集尘", "宠物毛发模式", "APP 分区清扫"],
+    "stock": 58,
+    "description": "适合有宠物或大户型家庭，能减少日常清洁负担。"
+  },
+  {
+    "id": "sku-watch-001",
+    "title": "FitWatch 3 健康手表",
+    "category": "手表",
+    "brand": "FitWatch",
+    "price": 1299,
+    "rating": 4.5,
+    "tags": ["运动", "健康", "睡眠", "长续航"],
+    "features": ["心率血氧监测", "睡眠分析", "100+ 运动模式", "10 天续航"],
+    "stock": 91,
+    "description": "适合健身、健康监测和轻量智能提醒，屏幕显示细腻。"
+  }
+]
